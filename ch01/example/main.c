@@ -12,31 +12,23 @@ int main(void) {
 
     SeqList *seqList = seqListCreate();
 
-    for (int i = 0; i < seqList->capacity; i++) {
-        printf("[%d]=", i);
-        scanf("%d", &seqList->head[i]);
-        seqList->length++;
-    }
-
-    seqListAdd(seqList, 14);
+    seqListAdd(seqList, 1);
+    seqListAdd(seqList, 4);
+    seqListAdd(seqList, 6);
     seqListDisplay(seqList);
 
-    seqListDelete(seqList,9);
-    seqListDisplay(seqList);
+    seqListDelete(seqList,0);
 
-    seqListDeleteElem(seqList, 14);
-    seqListDisplay(seqList);
-
-    seqListRevert(seqList);
-    seqListDisplay(seqList);
-
-    seqListInsert(seqList, 9, 14);
-    seqListDisplay(seqList);
-
-    seqListUpdate(seqList, 9, 14);
-    seqListDisplay(seqList);
-
-    seqListGet(seqList, 9);
+//    seqListDeleteElem(seqList, 10);
+//
+//    seqListRevert(seqList);
+//
+//    seqListInsert(seqList, 9, 14);
+//
+//    seqListUpdate(seqList, 9, 14);
+//
+//    seqListGet(seqList, 9);
+//
     seqListDisplay(seqList);
 
     seqListDestroy(seqList);

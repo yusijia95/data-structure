@@ -41,26 +41,35 @@ void seqListDisplay(const SeqList *seqList) {
 
 int seqListDelete(SeqList *list, int index) {
     if (index <= list->length) {
-        list->head[index] = '\0';
+        list->head[index] = NULL;
+        for(int i=index;i<list->length;i++){
+            list->head[i]=list->head[i+1];
+        }
+        list->length--;
         return 1;
-    } else {return 0;}
+    } else {
+        printf("删除失败");
+        return 0;
+    }
+
 }
 
 int seqListDeleteElem(SeqList *list, int elem) {
-    int i = 0;
+    int count = 0;
 
-    while (list->head[i] == '\0') {
-        i++;
+    while (list->head[count] != elem) {
+        count++;
 
-        if (i == list->length) {
+        if (count == list->length) {
+            printf("删除失败\n");
             return 0;
         }
     }
 
-    if (i == list->length - 1) {
-        list->head[i] = '\0';
+    if (count == list->length - 1) {
+        list->head[count] = NULL;
     } else {
-        for (; i < list->length; i++) {
+        for (int i = count; i < list->length; i++) {
 
             list->head[i] = list->head[i + 1];
         }
@@ -88,7 +97,7 @@ void seqListRevert(SeqList *list) {
 
 int seqListInsert(SeqList *list, int index, int elem) {
     if (list->length == list->capacity) {
-        list->head = (int *)realloc(list->head, (list->capacity + CAPACITY_STEP_SIZE) * sizeof(int));
+        list->head = (int *) realloc(list->head, (list->capacity + CAPACITY_STEP_SIZE) * sizeof(int));
         list->capacity += CAPACITY_STEP_SIZE;
     }
 
@@ -116,8 +125,8 @@ int seqListUpdate(SeqList *list, int index, int elem) {
 
 int seqListGet(SeqList *list, int index) {
     if (index <= list->capacity) {
-
-        printf("查询数字为%d\n", list->head[index]);
+        return list->head[index];
+//        printf("查询数字为%d\n", list->head[index]);
 
     } else {
         printf("查询失败");
